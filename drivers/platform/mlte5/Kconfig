@@ -1,0 +1,7 @@
+# CK Telecom configuration options
+
+config MACH_MLTE5
+	bool "Dexp M 5 LTE"
+	depends on ARCH_MSM8916
+	help
+	  Support for Dexp Ixion M5 LTE board

@@ -1,3 +1,7 @@
+#ifdef CONFIG_MLTE5_CAMERA
+#include <media/msm_cam_sensor_mlte5.h>
+#else
+
 #ifndef __LINUX_MSM_CAM_SENSOR_H
 #define __LINUX_MSM_CAM_SENSOR_H
 
@@ -359,11 +363,7 @@ struct msm_eeprom_cfg_data32 {
 	enum eeprom_cfg_type_t cfgtype;
 	uint8_t is_supported;
 	union {
-#ifdef CONFIG_WT88047_CAMERA
-		char eeprom_name[MAX_SENSOR_NAME];
-#else
 		char eeprom_name[MAX_EEPROM_NAME];
-#endif
 		struct eeprom_get_t get_data;
 		struct eeprom_read_t32 read_data;
 		struct eeprom_write_t32 write_data;
@@ -784,3 +784,5 @@ struct msm_flash_cfg_data_t32 {
 #endif
 
 #endif /* __LINUX_MSM_CAM_SENSOR_H */
+
+#endif /* CONFIG_MLTE5_CAMERA */
