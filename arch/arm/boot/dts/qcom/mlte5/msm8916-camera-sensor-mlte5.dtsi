@@ -60,7 +60,7 @@
 	eeprom0: qcom,eeprom@6b{
 		cell-index = <0>;
 		reg = <0x6b>;
-				qcom,eeprom-name = "truly_cma026";
+		qcom,eeprom-name = "truly_cma026";
 		compatible = "qcom,eeprom";
 		qcom,slave-addr = <0x6c>;
 		qcom,cci-master = <0>;
@@ -105,7 +105,6 @@
 		clock-names = "cam_src_clk", "cam_clk";
 	};
 
-
 	qcom,camera@0 {
 		cell-index = <0>;
 		compatible = "qcom,camera";
@@ -130,16 +129,13 @@
 		pinctrl-1 = <&cam_sensor_mclk0_sleep &cam_sensor_rear_sleep>;
 		gpios = <&msm_gpio 26 0>,
 			<&msm_gpio 35 0>,
-// 			<&msm_gpio 34 0>,
 			<&msm_gpio 120 0>;
 		qcom,gpio-reset = <1>;
-// 		qcom,gpio-standby = <2>;
 		qcom,gpio-af-pwdm = <2>;
 		qcom,gpio-req-tbl-num = <0 1 2>;
 		qcom,gpio-req-tbl-flags = <1 0 0>;
 		qcom,gpio-req-tbl-label = "CAMIF_MCLK",
 			"CAM_RESET1",
-// 			"CAM_STANDBY",
 			"CAM_AF_PWDM";
 		qcom,sensor-position = <0>;
 		qcom,sensor-mode = <0>;
@@ -147,7 +143,7 @@
 		qcom,mclk-23880000;
 		status = "ok";
 		clocks = <&clock_gcc clk_mclk0_clk_src>,
-				<&clock_gcc clk_gcc_camss_mclk0_clk>;
+			 <&clock_gcc clk_gcc_camss_mclk0_clk>;
 		clock-names = "cam_src_clk", "cam_clk";
 	};
 
@@ -237,7 +233,7 @@
 		qcom,mclk-23880000;
 		status = "ok";
 		clocks = <&clock_gcc clk_mclk1_clk_src>,
-				<&clock_gcc clk_gcc_camss_mclk1_clk>;
+			 <&clock_gcc clk_gcc_camss_mclk1_clk>;
 		clock-names = "cam_src_clk", "cam_clk";
 	};
 };

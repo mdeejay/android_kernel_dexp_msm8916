@@ -109,12 +109,12 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&gpio_led_off>;
 
-		red {
-			gpios = <&msm_gpio 22 0>;
-			label = "red";
-			linux,default-trigger = "none";
-			default-state = "off";
-			retain-state-suspended;
+	red {
+		gpios = <&msm_gpio 22 0>;
+		label = "red";
+		linux,default-trigger = "none";
+		default-state = "off";
+		retain-state-suspended;
 		};
 	};
 };
@@ -195,6 +195,7 @@
 		bma,sensors-cycle-threshold-y = <0x640>;
 		bma,sensors-cycle-threshold-z = <0x4000>;
 	};
+
 		ltr@23 { /* Ambient light and proximity sensor */
 		compatible = "ltr,ltr559";
 		reg = <0x23>;
@@ -211,7 +212,6 @@
 		ltr,ps-hysteresis-threshold = <30>;
 		ltr,als-polling-time = <200>;
 	};
-
 
 	memsic@30 { /* Magnetic field sensor */
 		compatible = "memsic,mmc3416x";

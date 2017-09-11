@@ -12,8 +12,8 @@
 
 /dts-v1/;
 
-#include "mlte5/msm8916-mlte5.dtsi"
 #include "msm8916-memory.dtsi"
+#include "mlte5/msm8916-mlte5.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8916 QRD SKUI";
@@ -31,22 +31,34 @@
 			pinctrl-names = "default";
 			pinctrl-0 = <&smb_int_default>;
 			qcom,chg-inhibit-disabled;
-			qcom,float-voltage-mv = <4350>;
-			qcom,fg-batt-capacity-mah = <0x8fc>;
-			qcom,fg-cc-soc-coeff = <0x8320>;
-			qcom,fg-cutoff-voltage-mv = <0xd48>;
-			qcom,iterm-ma = <200>;
-			qcom,recharge-thresh-mv = <100>;
-			qcom,thermal-mitigation = <0x3e8 0x2bc 0x258 0x0>;
+			qcom,fg-batt-capacity-mah = <2300>;
+			qcom,fg-cc-soc-coeff = <0x8373>;
+			qcom,fg-delta-soc = <1>;
+			qcom,fg-cutoff-voltage-mv = <3400>;
+			qcom,fg-iterm-ma = <150>;
+			qcom,fg-ibatt-standby-ma = <200>;
+			qcom,fg-cc-to-cv-mv = <4328>;
 			qcom,fg-auto-recharge-soc = <99>;
+			qcom,warm-recharge-thresh-mv = <200>;
+			qcom,thermistor-c1-coeff = <0x85d2>;
+			qcom,float-voltage-mv = <4350>;
+			qcom,iterm-ma = <100>;
+			qcom,otg-batt-curr-limit = <1500>;
+			qcom,thermal-mitigation = <1500 700 600 0>;
+			qcom,config-hard-thresholds;
+			qcom,hot-bat-decidegc = <600>;
+			qcom,cold-bat-decidegc = <0>;
+			qcom,soft-jeita-supported;
+			qcom,warm-bat-decidegc = <450>;
+			qcom,cool-bat-decidegc = <100>;
+			qcom,warm-bat-mv = <4000>;
+			qcom,cool-bat-mv = <4100>;
+			qcom,warm-bat-ma = <600>;
+			qcom,cool-bat-ma = <600>;
 			regulator-name = "smb1360_otg_vreg";
-			qcom,fg-delta-soc_reg = <0x1>;
-			qcom,empty-soc-disabled;
-			qcom,charging-led = <&msm_gpio 22 0>;
-			qcom,otg-batt-curr-limit = <0x5dc>;
-			qcom,fg-reset-at-pon;
 			qcom,shdn-after-pwroff;
-			qcom,thermistor-c1-coeff = <0x86da>;
+			qcom,fg-reset-at-pon;
+			qcom,fg-reset-thresold-mv = <100>;
 
 		};
 	};
@@ -56,7 +68,7 @@
 			compatible = "focaltech,5x06";
 			reg = <0x38>;
 			interrupt-parent = <&msm_gpio>;
-			interrupts = <13 0x2002>;
+			interrupts = <13 0x2>;
 			vdd-supply = <&pm8916_l17>;
 			vcc_i2c-supply = <&pm8916_l6>;
 			/* pins used by touchscreen */
@@ -64,12 +76,12 @@
 			pinctrl-0 = <&ts_int_active &ts_reset_active>;
 			pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
 			pinctrl-2 = <&ts_release>;
-				focaltech,name = "ft5X36i";
+			focaltech,name = "ft5X36i";
 			focaltech,family-id = <0x36>;
-			focaltech,reset-gpio = <&msm_gpio 0xc 0x0>;
-			focaltech,irq-gpio = <&msm_gpio 0xd 0x2002>;
-			focaltech,display-coords = <0x0 0x0 0x2d0 0x500>;
-			focaltech,panel-coords = <0x0 0x0 0x2d0 0x500>;
+			focaltech,reset-gpio = <&msm_gpio 12 0x0>;
+			focaltech,irq-gpio = <&msm_gpio 13 0x0>;
+			focaltech,display-coords = <0 0 720 1280>;
+			focaltech,panel-coords = <0 0 720 1280>;
 			focaltech,virtual_key;
 			focaltech,button-map= <139 102 158>;
 			focaltech,no-force-update;
@@ -77,7 +89,7 @@
 			focaltech,group-id = <1>;
 			focaltech,hard-reset-delay-ms = <20>;
 			focaltech,soft-reset-delay-ms = <200>;
-			focaltech,num-max-touches = <5>;
+			focaltech,num-max-touches = <10>;
 			focaltech,fw-delay-aa-ms = <30>;
 			focaltech,fw-delay-55-ms = <30>;
 			focaltech,fw-upgrade-id1 = <0x79>;
