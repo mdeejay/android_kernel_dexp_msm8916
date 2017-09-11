@@ -1446,6 +1446,7 @@
 				bias-pull-down;
 			};
 		};
+
 		ak8963_int_pin {
 			qcom,pins = <&gp 69>;
 			qcom,pin-func = <0>;

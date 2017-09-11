@@ -12,7 +12,7 @@
 
 #include "msm8916-qrd.dtsi"
 #include "dsi-panel-hx8394a-720p-video.dtsi"
-#include "msm8916-camera-sensor-qrd-skui.dtsi"
+#include "msm8916-camera-sensor-mlte5.dtsi"
 
 / {
 	memory {
@@ -250,7 +250,8 @@
 	mtp_batterydata: qcom,battery-data {
 		qcom,rpull-up-kohm = <100>;
 		qcom,vref-batt-therm = <1800000>;
-#include "batterydata-qrd-skut-4v35-2300mah.dtsi"
+
+#include "batterydata-mlte5-4v35-2300mah.dtsi"
 
 	};
 };

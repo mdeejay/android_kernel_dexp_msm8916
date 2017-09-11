@@ -206,9 +206,9 @@
 			compatible = "qcom,qpnp-linear-charger";
 			#address-cells = <1>;
 			#size-cells = <1>;
-			qcom,vddmax-mv = <4350>;
-			qcom,vddsafe-mv = <4380>;
-			qcom,vinmin-mv = <4408>;
+			qcom,vddmax-mv = <4200>;
+			qcom,vddsafe-mv = <4200>;
+			qcom,vinmin-mv = <4308>;
 			qcom,ibatsafe-ma = <1440>;
 			qcom,thermal-mitigation = <1440 720 630 0>;
 			qcom,cool-bat-decidegc = <100>;
@@ -217,14 +217,14 @@
 			qcom,warm-bat-mv = <4100>;
 			qcom,ibatmax-warm-ma = <360>;
 			qcom,ibatmax-cool-ma = <360>;
-			qcom,batt-hot-percentage = <35>;
-			qcom,batt-cold-percentage = <70>;
+			qcom,batt-hot-percentage = <25>;
+			qcom,batt-cold-percentage = <80>;
 			qcom,tchg-mins = <232>;
 			qcom,chg-vadc = <&pm8916_vadc>;
 			qcom,chg-adc_tm = <&pm8916_adc_tm>;
 			qcom,battery-data = <&mtp_batterydata>;
 			qcom,charging-led = <&msm_gpio 22 0>;
-			status = "ok";
+			status = "disabled";
 
 			qcom,chgr@1000 {
 				reg = <0x1000 0x100>;
@@ -269,9 +269,9 @@
 			status = "disabled";
 
 			qcom,v-cutoff-uv = <3400000>;
-			qcom,max-voltage-uv = <4350000>;
+			qcom,max-voltage-uv = <4200000>;
 			qcom,r-conn-mohm = <0>;
-			qcom,shutdown-soc-valid-limit = <0x64>;
+			qcom,shutdown-soc-valid-limit = <100>;
 			qcom,low-soc-calculate-soc-threshold = <15>;
 			qcom,low-voltage-calculate-soc-ms = <1000>;
 			qcom,low-soc-calculate-soc-ms = <5000>;
@@ -331,21 +331,6 @@
 			qcom,source-sel = <0x1>;
 			qcom,mode-ctrl = <0x11>;
 			qcom,vin-ctrl = <0x0>;
-		};
-		};
-		qcom,leds@a300 {
-			status = "okay";
-			qcom,led_mpp_2 {
-				label = "mpp";
-				linux,name = "red";
-				linux,default-trigger = "none";
-				qcom,default-state = "off";
-				qcom,max-current = <40>;
-				qcom,current-setting = <5>;
-				qcom,id = <6>;
-				qcom,mode = "manual";
-				qcom,source-sel = <1>;
-				qcom,mode-ctrl = <0x60>;
 			};
 		};
 	};

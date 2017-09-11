@@ -101,20 +101,20 @@
 	soc: soc { };
 };
 
-#include "msm8916-coresight.dtsi"
-#include "msm8916-smp2p.dtsi"
-#include "msm8916-pinctrl.dtsi"
-#include "msm8916-camera.dtsi"
-#include "msm8916-ipcrouter.dtsi"
-#include "msm-gdsc-8916.dtsi"
-#include "msm8916-iommu.dtsi"
-#include "msm8916-gpu.dtsi"
-#include "msm8916-mdss.dtsi"
-#include "msm8916-mdss-pll.dtsi"
-#include "msm8916-iommu-domains.dtsi"
-#include "msm8916-bus.dtsi"
-#include "msm8916-camera.dtsi"
-#include "msm8916-drm.dtsi"
+#include "../msm8916-coresight.dtsi"
+#include "../msm8916-smp2p.dtsi"
+#include "../msm8916-camera.dtsi"
+#include "../msm8916-ipcrouter.dtsi"
+#include "msm8916-pinctrl-mlte5.dtsi"
+#include "../msm-gdsc-8916.dtsi"
+#include "../msm8916-iommu.dtsi"
+#include "../msm8916-gpu.dtsi"
+#include "../msm8916-mdss.dtsi"
+#include "../msm8916-mdss-pll.dtsi"
+#include "../msm8916-iommu-domains.dtsi"
+#include "../msm8916-bus.dtsi"
+#include "../msm8916-camera.dtsi"
+#include "../msm8916-drm.dtsi"
 
 &soc {
 	#address-cells = <1>;
@@ -740,8 +740,8 @@
 		qcom,use-sw-aes-xts-algo;
 		qcom,use-sw-aes-ccm-algo;
 		qcom,use-sw-ahash-algo;
-     qcom,use-sw-hmac-algo;
-     qcom,use-sw-aead-algo;
+		qcom,use-sw-hmac-algo;
+		qcom,use-sw-aead-algo;
 		status = "disabled";
 		qcom,ce-opp-freq = <100000000>;
 	};
@@ -830,7 +830,7 @@
 			qcom,smd-irq-bitmask = <0x1000>;
 			interrupts = <0 25 1>;
 			label = "modem";
-       qcom,not-loadable;
+			qcom,not-loadable;
 		};
 
 		qcom,smsm-modem {
@@ -1340,35 +1340,34 @@
 		compatible = "qcom,iris_fm";
 	};
 
-	
-	
 	qcom,wcnss-wlan@0a000000 {
-			compatible = "qcom,wcnss_wlan";
-			reg = <0xa000000 0x280000 
-			0xb011008 0x4 
-			0xa21b000 0x3000 
-			0x3204000 0x100 
-			0x3200800 0x200 
-			0xa100400 0x200 
-			0xa205050 0x200 
-			0xa219000 0x20 
-			0xa080488 0x8 
-			0xa080fb0 0x8 
-			0xa08040c 0x8 
-			0xa0120a8 0x8 
-			0xa012448 0x8 
-			0xa080c00 0x1>;
-			
-			reg-names = "wcnss_mmio", "wcnss_fiq", 
-			"pronto_phy_base", "riva_phy_base", 
-			"riva_ccu_base", "pronto_a2xb_base", 
-			"pronto_ccpu_base", "pronto_saw2_base", 
-			"wlan_tx_phy_aborts", "wlan_brdg_err_source", 
-			"wlan_tx_status", "alarms_txctl", 
-			"alarms_tactl", "pronto_mcu_base";
-			
-			interrupts = <0x0 0x91 0x0 0x0 0x92 0x0>;
-			interrupt-names = "wcnss_wlantx_irq", "wcnss_wlanrx_irq";
+		compatible = "qcom,wcnss_wlan";
+		reg = <0x0a000000 0x280000>,
+			<0xb011008 0x04>,
+			<0x0a21b000 0x3000>,
+			<0x03204000 0x00000100>,
+			<0x03200800 0x00000200>,
+			<0x0A100400 0x00000200>,
+			<0x0A205050 0x00000200>,
+			<0x0A219000 0x00000020>,
+			<0x0A080488 0x00000008>,
+			<0x0A080fb0 0x00000008>,
+			<0x0A08040c 0x00000008>,
+			<0x0A0120a8 0x00000008>,
+			<0x0A012448 0x00000008>,
+			<0x0A080c00 0x00000001>;
+
+		reg-names = "wcnss_mmio", "wcnss_fiq",
+			    "pronto_phy_base", "riva_phy_base",
+			    "riva_ccu_base", "pronto_a2xb_base",
+			    "pronto_ccpu_base", "pronto_saw2_base",
+			    "wlan_tx_phy_aborts","wlan_brdg_err_source",
+			    "wlan_tx_status", "alarms_txctl",
+			    "alarms_tactl", "pronto_mcu_base";
+
+		interrupts = <0 145 0 0 146 0>;
+		interrupt-names = "wcnss_wlantx_irq", "wcnss_wlanrx_irq";
+
 		qcom,pronto-vddmx-supply = <&pm8916_l3_corner_ao>;
 		qcom,pronto-vddcx-supply = <&pm8916_s1_corner>;
 		qcom,pronto-vddpx-supply = <&pm8916_l7>;
@@ -1385,19 +1384,21 @@
 
 		gpios = <&msm_gpio 40 0>, <&msm_gpio 41 0>, <&msm_gpio 42 0>,
 					<&msm_gpio 43 0>, <&msm_gpio 44 0>;
+
 		clocks = <&clock_rpm clk_xo_wlan_clk>,
 			 <&clock_rpm clk_rf_clk2>,
 			 <&clock_debug clk_gcc_debug_mux>,
 			 <&clock_gcc clk_wcnss_m_clk>,
 			 <&clock_gcc clk_gcc_snoc_qosgen_clk>;
-			 clock-names = "xo", "rf_clk", "measure", "wcnss_debug";
-			qcom,has-autodetect-xo;
-		qcom,wlan-rx-buff-count = <512>;
-			qcom,is-pronto-vt;
-			qcom,has-pronto-hw;
-		qcom,wcnss-adc_tm = <&pm8916_adc_tm>;
-		};
+		clock-names = "xo", "rf_clk", "measure", "wcnss_debug",
+				"snoc_qosgen";
 
+		qcom,has-autodetect-xo;
+		qcom,wlan-rx-buff-count = <512>;
+		qcom,is-pronto-vt;
+		qcom,has-pronto-hw;
+		qcom,wcnss-adc_tm = <&pm8916_adc_tm>;
+	};
 
 	spi_0: spi@78b7000 { /* BLSP1 QUP3 */
 		compatible = "qcom,spi-qup-v2";
@@ -1630,25 +1631,25 @@
 	qcom,msm-thermal {
 		compatible = "qcom,msm-thermal";
 		qcom,sensor-id = <5>;
-			qcom,poll-ms = <0xfa>;
-			qcom,limit-temp = <0x3c>;
-			qcom,temp-hysteresis = <0xa>;
-			qcom,freq-step = <0x2>;
+		qcom,poll-ms = <250>;
+		qcom,limit-temp = <60>;
+		qcom,temp-hysteresis = <10>;
+		qcom,freq-step = <2>;
 		qcom,freq-control-mask = <0xf>;
-			qcom,core-limit-temp = <0x50>;
-			qcom,core-temp-hysteresis = <0xa>;
+		qcom,core-limit-temp = <80>;
+		qcom,core-temp-hysteresis = <10>;
 		qcom,core-control-mask = <0xe>;
-			qcom,hotplug-temp = <0x5e>;
-			qcom,hotplug-temp-hysteresis = <0xf>;
+		qcom,hotplug-temp = <94>;
+		qcom,hotplug-temp-hysteresis = <15>;
 		qcom,cpu-sensors = "tsens_tz_sensor5", "tsens_tz_sensor5",
 				"tsens_tz_sensor4", "tsens_tz_sensor4";
-			qcom,freq-mitigation-temp = <0x5e>;
-			qcom,freq-mitigation-temp-hysteresis = <0xa>;
-			qcom,freq-mitigation-value = <0x61a80>;
-			qcom,freq-mitigation-control-mask = <0x1>;
+		qcom,freq-mitigation-temp = <94>;
+		qcom,freq-mitigation-temp-hysteresis = <10>;
+		qcom,freq-mitigation-value = <400000>;
+		qcom,freq-mitigation-control-mask = <0x01>;
 		qcom,online-hotplug-core;
-			qcom,vdd-restriction-temp = <0x5>;
-			qcom,vdd-restriction-temp-hysteresis = <0xa>;
+		qcom,vdd-restriction-temp = <5>;
+		qcom,vdd-restriction-temp-hysteresis = <10>;
 		vdd-dig-supply = <&pm8916_s1_floor_corner>;
 
 		qcom,vdd-dig-rstr{
@@ -1659,7 +1660,7 @@
 
 		qcom,vdd-apps-rstr{
 			qcom,vdd-rstr-reg = "vdd-apps";
-				qcom,levels = <0x82352 0xc3500 0xf3c00>;
+			qcom,levels = <533330 800000 998400>;
 			qcom,freq-req;
 		};
 	};
@@ -1907,10 +1908,10 @@
 	status = "okay";
 };
 
-#include "msm-pm8916-rpm-regulator.dtsi"
-#include "msm-pm8916.dtsi"
-#include "msm8916-regulator.dtsi"
-#include "msm8916-pm.dtsi"
+#include "../msm-pm8916-rpm-regulator.dtsi"
+#include "msm-pm8916-mlte5.dtsi"
+#include "../msm8916-regulator.dtsi"
+#include "../msm8916-pm.dtsi"
 
 &pm8916_vadc {
 	chan@0 {
